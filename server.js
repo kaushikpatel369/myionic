@@ -22,7 +22,9 @@ app.use(function (req, res, next) {
 		next();
 	});
 
-	var url = 'mongodb://demo123:raj970123@ds131480.mlab.com:31480/demo';
+	//var url = 'mongodb://demo123:raj970123@ds131480.mlab.com:31480/demo';
+	var url = 'mongodb://mydb:7797785640sr@ds135690.mlab.com:35690/demo';
+	
 	MongoClient.connect(url, function(err, db) {
 		if (err) throw err;
 		console.log("Connected to Database");
@@ -34,7 +36,7 @@ app.use(function (req, res, next) {
 		});
 	});
 
-	app.post('/contactlist',function(req,res){
+	app.post('/contactlists',function(req,res){
 		console.log(req.body)
 		db.collection('users').insertOne(req.body,function(err,docs){
 			//console.log(docs);
@@ -42,7 +44,7 @@ app.use(function (req, res, next) {
 		});
 	});
 
-	app.delete('/contactlist/:id',function(req,res){
+	app.delete('/contactlists/:id',function(req,res){
 		var id = req.params.id;
 		console.log(id);
 		db.collection('users').deleteOne({_id: ObjectID(id)},function(err,docs){
@@ -50,7 +52,7 @@ app.use(function (req, res, next) {
 		})
 	});
 
-	app.get('/contactlist/:id',function(req,res){
+	app.get('/contactlists/:id',function(req,res){
 		var id = req.params.id;
 		console.log(id);
 		db.collection('users').findOne({_id: ObjectID(id)},function(err,docs){
@@ -59,7 +61,7 @@ app.use(function (req, res, next) {
 		});
 	});
 
-	app.put('/contactlist/:id',function(req,res){
+	app.put('/contactlists/:id',function(req,res){
 		var id = req.params.id;
 		console.log(req.body.name);
 		console.log(id);
